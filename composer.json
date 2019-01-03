@@ -1,0 +1,17 @@
+{
+    "name": "rdx/text-captcha",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Rudie Dirkx",
+            "email": "github@hotblocks.nl"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "rdx\\textcaptcha\\": "src/"
+        }
+    },
+    "require": {}
+}
