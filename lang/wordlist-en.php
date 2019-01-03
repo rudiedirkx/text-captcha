@@ -4,7 +4,7 @@ return [
 	'repos' => [
 		[
 			'labels' => ['fruit', 'fruits'],
-			'words' => ['apple', 'banana', 'pear', 'mango', 'kiwi', 'grape', 'strawberry' 'lemon'],
+			'words' => ['apple', 'banana', 'pear', 'mango', 'kiwi', 'grape', 'strawberry', 'lemon'],
 		],
 		[
 			'labels' => ['body part', 'body parts'],
