@@ -30,11 +30,20 @@ class ArithmeticTranslatorLocal implements ArithmeticTranslator {
 	}
 
 	public function question($number1, $operator, $number2) : string {
+		$this->ensureTranslations();
+
+		$questions = $this->translations['questions'];
+		$question = $questions[array_rand($questions)];
+
 		$number1 = $this->number($number1);
 		$operator = $this->operator($operator);
 		$number2 = $this->number($number2);
 
-		return "$number1 $operator $number2";
+		return strtr($question, [
+			'__a__' => $number1,
+			'__op__' => $operator,
+			'__b__' => $number2,
+		]);
 	}
 
 }

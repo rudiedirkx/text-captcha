@@ -33,7 +33,7 @@ class WordListTranslatorLocal implements WordListTranslator {
 			'__n__' => $n,
 			'__nth__' => $this->nth($n),
 			'__repo__' => $repo,
-			'__list__' => implode(', ', $list),
+			'__list__' => implode(' ', $list),
 		]);
 	}
 

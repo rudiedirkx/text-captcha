@@ -11,4 +11,10 @@ return [
 		'p' => 'plus',
 		'm' => 'min',
 	],
+	'questions' => [
+		'__a__ __op__ __b__ = ?',
+		'Hoeveel is __a__ __op__ __b__?',
+		'Wat is __a__ __op__ __b__?',
+		'Bereken __a__ __op__ __b__.',
+	],
 ];

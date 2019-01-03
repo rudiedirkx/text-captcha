@@ -8,8 +8,12 @@ return [
 		'dier' => ['olifant', 'paard', 'koe', 'kip', 'aap'],
 	],
 	'questions' => [
-		"Wat is de/het __nth__ __repo__ in [__list__]?",
-		"In de lijst [__list__], wat is de/het __nth__ __repo__?",
+		"Wat is de/het __nth__ __repo__ in __list__?",
+		"In de lijst __list__ wat is de/het __nth__ __repo__?",
+		"In de lijst lijst __list__ wat is de/het __nth__ __repo__?",
+		"Van __list__ wat is de/het __nth__ __repo__?",
+		"Van lijst __list__ wat is de/het __nth__ __repo__?",
+		"Van lijst lijst __list__ wat is de/het __nth__ __repo__?",
 	],
 	'nth' => [
 		'eerste',
