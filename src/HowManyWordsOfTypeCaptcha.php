@@ -2,27 +2,24 @@
 
 namespace rdx\textcaptcha;
 
-class WordListCaptcha extends CaptchaType {
+class HowManyWordsOfTypeCaptcha extends CaptchaType {
 
 	protected $translator;
 	protected $options;
 
-	public function __construct(WordListTranslator $translator, array $options = []) {
+	public function __construct(HowManyWordsOfTypeTranslator $translator, array $options = []) {
 		$this->translator = $translator;
 		$this->options = $options + [
 			'size' => 6,
-			'inject' => 3,
+			'min' => 0,
+			'max' => 4,
 		];
-	}
-
-	public function getType() : string {
-		return 'wordlist';
 	}
 
 	public function make() : CaptchaQuestion {
 		$_repos = $this->translator->repos();
 		$_size = $this->options['size'];
-		$_inject = $this->options['inject'];
+		$_inject = rand($this->options['min'], $this->options['max']);
 
 		$repo = array_rand($_repos);
 
@@ -37,13 +34,19 @@ class WordListCaptcha extends CaptchaType {
 		}
 
 		$list = array_slice($all, 0, $_size);
-		$potentials = array_values(array_intersect($list, $_repos[$repo]));
-		$which = array_rand($potentials) + 1;
-		$answer = $potentials[$which - 1];
+		$matches = count(array_values(array_intersect($list, $_repos[$repo])));
 
-		$question = $this->translator->question($repo, $which, $list);
+		$question = $this->translator->question($repo, $list);
 
-		return new CaptchaQuestion($this, $question, [$answer]);
+		$answers = [
+			$matches,
+			$this->translator->number($matches),
+		];
+		if ($matches == 0) {
+			$answers[] = $this->translator->none();
+		}
+
+		return new CaptchaQuestion($this, $question, $answers);
 	}
 
 }

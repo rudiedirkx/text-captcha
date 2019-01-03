@@ -9,7 +9,8 @@ class CaptchaMaker {
 	static public function createLocal($lang = 'en') : self {
 		$maker = new static();
 		$maker->add(new ArithmeticCaptcha(new ArithmeticTranslatorLocal(__DIR__ . "/../lang/arithmetic-$lang.php")));
-		$maker->add(new WordListCaptcha(new WordListTranslatorLocal(__DIR__ . "/../lang/wordlist-$lang.php")));
+		$maker->add(new NthWordOfTypeCaptcha(new NthWordOfTypeTranslatorLocal(__DIR__ . "/../lang/wordlist-$lang.php")));
+		$maker->add(new HowManyWordsOfTypeCaptcha(new HowManyWordsOfTypeTranslatorLocal(__DIR__ . "/../lang/wordlist-$lang.php")));
 		return $maker;
 	}
 

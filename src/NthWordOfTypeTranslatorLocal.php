@@ -2,7 +2,7 @@
 
 namespace rdx\textcaptcha;
 
-class WordListTranslatorLocal implements WordListTranslator {
+class NthWordOfTypeTranslatorLocal implements NthWordOfTypeTranslator {
 
 	protected $file;
 	protected $translations;
@@ -20,19 +20,27 @@ class WordListTranslatorLocal implements WordListTranslator {
 	public function repos() : array {
 		$this->ensureTranslations();
 
-		return $this->translations['repos'];
+		return array_map(function($repo) {
+			return $repo['words'];
+		}, $this->translations['repos']);
+	}
+
+	public function repo($repo) : string {
+		return $this->translations['repos'][$repo]['labels'][0];
 	}
 
 	public function question($repo, $n, array $list) : string {
 		$this->ensureTranslations();
 
-		$questions = $this->translations['questions'];
+		$repoTitle = $this->repo($repo);
+
+		$questions = $this->translations['questions_nth'];
 		$question = $questions[array_rand($questions)];
 
 		return strtr($question, [
 			'__n__' => $n,
 			'__nth__' => $this->nth($n),
-			'__repo__' => $repo,
+			'__repo__' => $repoTitle,
 			'__list__' => implode(' ', $list),
 		]);
 	}

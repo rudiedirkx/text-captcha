@@ -14,10 +14,6 @@ class ArithmeticCaptcha extends CaptchaType {
 		];
 	}
 
-	public function getType() : string {
-		return 'arithmetic';
-	}
-
 	public function make() : CaptchaQuestion {
 		$n1 = rand(1, $this->options['max'] - 1);
 		$op = rand(0, 1) ? 'p' : 'm';
