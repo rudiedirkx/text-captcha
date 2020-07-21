@@ -41,12 +41,17 @@ $text = $captcha->getQuestion();
 preg_match('#^(.{' . ceil(strlen($text)/2) . ',}?) (.+)$#', $text, $lines);
 array_shift($lines);
 
-$img = imagecreatetruecolor(strlen($text) * 11, 44);
+$img = imagecreatetruecolor($width = strlen($text) * 11, $height = 44);
 $textColor = imagecolorallocate($img, rand(0, 190), rand(0, 190), rand(0, 190));
 $white = imagecolorallocate($img, 255, 255, 255);
-$transp = imagecolortransparent($img, $white);
-
 imagefill($img, 0, 0, $white);
+
+for ($y = 0; $y < $height; $y += 3) {
+	for ($x = 0; $x < $width; $x += 3) {
+		$color = imagecolorallocate($img, rand(190, 255), rand(190, 255), rand(190, 255));
+		imagefilledrectangle($img, $x, $y, $x+3, $y+3, $color);
+	}
+}
 
 // $font = imageloadfont($fontFile);
 // imagestring($img, $font, 5, 5, $text, $color);
